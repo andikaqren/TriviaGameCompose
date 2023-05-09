@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -18,24 +17,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.startActivity
 import com.example.triviagame.data.Question
 import com.example.triviagame.ui.theme.TriviaGameTheme
 
 class MainActivity : ComponentActivity() {
-    private val startAchievementActivity =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -95,6 +87,11 @@ fun TriviaGameContent(activity: Activity?) {
             score++
         }
     }
+
+    val onHomeClicked: () -> Unit = {
+        val intent = Intent(activity, MainMenu::class.java)
+        activity?.startActivity(intent)
+    }
     val currentQuestion = questions[currentQuestionIndex]
 
     TriviaGameLayout(
@@ -104,10 +101,10 @@ fun TriviaGameContent(activity: Activity?) {
         onOptionSelected = onOptionSelected,
         onNextQuestion = onNextQuestion,
         score = score,
+        onHomeClicked= onHomeClicked,
         questionImage = painterResource(id = R.drawable.brain)
     )
 }
-
 
 
 @Composable
@@ -117,22 +114,31 @@ fun TriviaGameLayout(
     selectedOption: String?,
     onOptionSelected: (String) -> Unit,
     onNextQuestion: () -> Unit,
+    onHomeClicked: () -> Unit, // New parameter for home button click
     score: Int,
     questionImage: Painter
-) {
+) { Scaffold(
+    topBar = {
+        TopAppBar(
+            title = {
+                Text(
+                    text = "Trivia Game",
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            },
+            backgroundColor = Color.White,
+            elevation = 4.dp
+        )
+    }
+){
     Box(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Background Image
-       /* Image(
-            painter = painterResource(id = R.drawable.ui_background), // Replace with your background image resource
-            contentDescription = "Background Image",
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds
-        )*/
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -197,9 +203,22 @@ fun TriviaGameLayout(
                 ),
                 modifier = Modifier.padding(top = 16.dp)
             )
+
+            IconButton(
+                onClick = onHomeClicked,
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(top = 16.dp)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_home),
+                    contentDescription = "Home Button"
+                )
+            }
         }
-    }
+    }}
 }
+
 
 @Composable
 fun OptionButton(

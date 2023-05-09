@@ -27,7 +27,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name="com.example.triviagame.AchievementActivity" />
+        <activity android:name=".AchievementActivity" />
+        <activity android:name=".MainMenu" />
+        <activity android:name="com.example.triviagame.StoreActivity" />
     </application>
 
 </manifest>
