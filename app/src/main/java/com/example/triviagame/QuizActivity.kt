@@ -89,7 +89,7 @@ fun TriviaGameContent(activity: Activity?) {
     }
 
     val onHomeClicked: () -> Unit = {
-        val intent = Intent(activity, MainMenu::class.java)
+        val intent = Intent(activity, MainMenuActivity::class.java)
         activity?.startActivity(intent)
     }
     val currentQuestion = questions[currentQuestionIndex]
@@ -194,6 +194,26 @@ fun TriviaGameLayout(
                 )
             }
 
+            Button(
+                onClick = onHomeClicked,
+                modifier = Modifier
+                    .padding(top = 16.dp)
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = Color.Green,
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    text = "Back to Main Menu",
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+
             Text(
                 text = "Score: $score",
                 style = TextStyle(
@@ -204,17 +224,7 @@ fun TriviaGameLayout(
                 modifier = Modifier.padding(top = 16.dp)
             )
 
-            IconButton(
-                onClick = onHomeClicked,
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(top = 16.dp)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_home),
-                    contentDescription = "Home Button"
-                )
-            }
+
         }
     }}
 }

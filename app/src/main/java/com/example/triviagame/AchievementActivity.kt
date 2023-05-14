@@ -58,8 +58,34 @@ class AchievementActivity : ComponentActivity() {
                             title = "Fitness Enthusiast",
                             description = "You've completed 100 workouts!",
                             iconRes = R.drawable.brain
+                        ),
+                        Achievement(
+                            title = "Green Eater",
+                            description = "You've maintained a plant-based diet for 30 days!",
+                            iconRes = R.drawable.brain
+                        ),
+                        Achievement(
+                            title = "Marathon Runner",
+                            description = "You've completed a full marathon!",
+                            iconRes = R.drawable.brain
+                        ),
+                        Achievement(
+                            title = "Yoga Master",
+                            description = "You've mastered advanced yoga poses!",
+                            iconRes = R.drawable.brain
+                        ),
+                        Achievement(
+                            title = "Healthy Chef",
+                            description = "You've cooked 100 nutritious meals!",
+                            iconRes = R.drawable.brain
+                        ),
+                        Achievement(
+                            title = "Fitness Streak",
+                            description = "You've exercised for 365 consecutive days!",
+                            iconRes = R.drawable.brain
                         )
                     )
+
 
                     AchievementLayout(achievements = achievements)
                 }
