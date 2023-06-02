@@ -10,7 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -26,13 +30,46 @@ class QuestActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             title = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.target),
+                                    contentDescription = "Energy Icon",
+                                    tint = Color.Unspecified,
+                                    modifier = Modifier.size(24.dp)
+                                )
                                 Text(
-                                    text = "Quest",
+                                    text = "Daily Quest",
                                     style = TextStyle(
                                         fontSize = 20.sp,
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
+                                        color = colorResource(id = R.color.blacky),
+                                        fontFamily = FontFamily(Font(R.font.modern))
                                     )
                                 )
+
+                            },
+                            actions = {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(end = 16.dp)
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.energy_drink),
+                                        contentDescription = "Energy Icon",
+                                        tint = Color.Unspecified,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Text(
+                                        text = "99999",
+                                        color = colorResource(id = R.color.blacky),
+                                        style = TextStyle(
+                                            fontSize = 20.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            fontFamily = FontFamily(Font(R.font.games))
+                                        )
+
+
+                                    )
+                                }
                             },
                             backgroundColor = Color.White,
                             elevation = 4.dp
@@ -47,6 +84,7 @@ class QuestActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun QuestMenu() {
     val quests = listOf(
@@ -62,8 +100,10 @@ fun QuestMenu() {
             .padding(16.dp)
     ) {
         Text(
-            text = "Finish all quests to earn 100 coins!",
+            text = "Finish all quests to earn 100 energy!",
             style = MaterialTheme.typography.h5,
+            color = colorResource(id = R.color.blacky),
+            fontFamily = FontFamily(Font(R.font.candy)),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -76,6 +116,7 @@ fun QuestMenu() {
             onClick = { claimRewards(quests) },
             modifier = Modifier
                 .padding(top = 16.dp)
+                .fillMaxWidth()
                 .align(Alignment.End)
         ) {
             Text(text = "Claim Rewards")
@@ -103,6 +144,7 @@ fun Quest(quest: QuestItem, onCheckedChange: (Boolean) -> Unit) {
         )
     }
 }
+
 fun claimRewards(quests: List<QuestItem>) {
     // Logic for claiming rewards based on completed quests
 }

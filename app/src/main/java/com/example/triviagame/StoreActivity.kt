@@ -13,8 +13,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,13 +36,46 @@ class StoreActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             title = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.store),
+                                    contentDescription = "Energy Icon",
+                                    tint = Color.Unspecified,
+                                    modifier = Modifier.size(24.dp)
+                                )
                                 Text(
                                     text = "Store",
                                     style = TextStyle(
                                         fontSize = 20.sp,
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
+                                        color = colorResource(id = R.color.blacky),
+                                        fontFamily = FontFamily(Font(R.font.modern))
                                     )
                                 )
+
+                            },
+                            actions = {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(end = 16.dp)
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.energy_drink),
+                                        contentDescription = "Energy Icon",
+                                        tint = Color.Unspecified,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Text(
+                                        text = "99999",
+                                        color = colorResource(id = R.color.blacky),
+                                        style = TextStyle(
+                                            fontSize = 20.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            fontFamily = FontFamily(Font(R.font.games))
+                                        )
+
+
+                                    )
+                                }
                             },
                             backgroundColor = Color.White,
                             elevation = 4.dp
@@ -109,17 +146,6 @@ fun StoreLayout() {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.energy_drink),
-                    contentDescription = "Coin",
-                    modifier = Modifier.size(24.dp)
-                )
-                Spacer(modifier = Modifier.width(4.dp))
-                Text(
-                    text = "${coinCount.value}",
-                    style = MaterialTheme.typography.subtitle1,
-                    modifier = Modifier.clickable { /* Handle coin count click */ }
-                )
             }
         }
 
@@ -134,6 +160,8 @@ fun StoreLayout() {
         Text(
             text = "Welcome to the Store",
             style = MaterialTheme.typography.h5,
+            fontFamily = FontFamily(Font(R.font.candy)),
+            color = colorResource(id = R.color.blacky),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -164,17 +192,20 @@ fun StoreItemRow(item: StoreItem) {
         Column {
             Text(
                 text = item.name,
-                style = MaterialTheme.typography.subtitle1
+                style = MaterialTheme.typography.subtitle1,
+                fontFamily = FontFamily(Font(R.font.candy)),
+                color = colorResource(id = R.color.blacky)
             )
 
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val priceText =item.price
+                val priceText = item.price
                 Text(
                     text = priceText,
                     style = MaterialTheme.typography.body2,
-                    color = Color.Gray,
+                    color = colorResource(id = R.color.blacky),
+                    fontFamily = FontFamily(Font(R.font.games)),
                     modifier = Modifier.padding(start = 4.dp)
                 )
                 Icon(

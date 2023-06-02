@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -18,7 +19,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.triviagame.R
 import com.example.triviagame.data.Workout
 import com.example.triviagame.ui.theme.TriviaGameTheme
 
@@ -42,6 +42,7 @@ class WorkoutActivity : ComponentActivity() {
                                     style = TextStyle(
                                         fontSize = 20.sp,
                                         fontWeight = FontWeight.Bold,
+                                        color = colorResource(id = R.color.blacky),
                                         fontFamily = FontFamily(Font(R.font.modern))
                                     )
                                 )
@@ -60,7 +61,7 @@ class WorkoutActivity : ComponentActivity() {
                                     )
                                     Text(
                                         text = "99999",
-                                        color = Color.Green,
+                                        color = colorResource(id = R.color.blacky),
                                         style = TextStyle(
                                             fontSize = 20.sp,
                                             fontWeight = FontWeight.Bold,

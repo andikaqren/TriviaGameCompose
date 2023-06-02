@@ -17,8 +17,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -101,8 +104,8 @@ fun TriviaGameContent(activity: Activity?) {
         onOptionSelected = onOptionSelected,
         onNextQuestion = onNextQuestion,
         score = score,
-        onHomeClicked= onHomeClicked,
-        questionImage = painterResource(id = R.drawable.brain)
+        onHomeClicked = onHomeClicked,
+        questionImage = painterResource(id = R.drawable.quiz)
     )
 }
 
@@ -117,116 +120,151 @@ fun TriviaGameLayout(
     onHomeClicked: () -> Unit, // New parameter for home button click
     score: Int,
     questionImage: Painter
-) { Scaffold(
-    topBar = {
-        TopAppBar(
-            title = {
-                Text(
-                    text = "Trivia Game",
-                    style = TextStyle(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
+) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.quiz),
+                        contentDescription = "Energy Icon",
+                        tint = Color.Unspecified,
+                        modifier = Modifier.size(24.dp)
                     )
-                )
-            },
-            backgroundColor = Color.White,
-            elevation = 4.dp
-        )
-    }
-){
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+                    Text(
+                        text = "Trivia Games",
+                        style = TextStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = colorResource(id = R.color.blacky),
+                            fontFamily = FontFamily(Font(R.font.modern))
+                        )
+                    )
+
+                },
+                actions = {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.padding(end = 16.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.energy_drink),
+                            contentDescription = "Energy Icon",
+                            tint = Color.Unspecified,
+                            modifier = Modifier.size(24.dp)
+                        )
+                        Text(
+                            text = "99999",
+                            color = colorResource(id = R.color.blacky),
+                            style = TextStyle(
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily(Font(R.font.games))
+                            )
+
+
+                        )
+                    }
+                },
+                backgroundColor = Color.White,
+                elevation = 4.dp
+            )
+        }
     ) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(16.dp)
         ) {
-            Image(
-                painter = questionImage,
-                contentDescription = "Question Image",
+            Column(
                 modifier = Modifier
-                    .size(200.dp)
-                    .clip(shape = RoundedCornerShape(8.dp))
-                    .padding(bottom = 16.dp)
-            )
-
-            Text(
-                text = question,
-                style = TextStyle(
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    color = Color.Black
-                ),
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
-            options.forEach { option ->
-                OptionButton(
-                    text = option,
-                    isSelected = option == selectedOption,
-                    onClick = { onOptionSelected(option) }
-                )
-            }
-
-            Button(
-                onClick = onNextQuestion,
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Blue,
-                    contentColor = Color.White
-                )
+                    .fillMaxSize()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                Image(
+                    painter = questionImage,
+                    contentDescription = "Question Image",
+                    modifier = Modifier
+                        .size(200.dp)
+                        .clip(shape = RoundedCornerShape(8.dp))
+                        .padding(bottom = 16.dp)
+                )
+
                 Text(
-                    text = "Next Question",
+                    text = question,
                     style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        color = colorResource(id = R.color.blacky)
+                    ),
+                    modifier = Modifier.padding(bottom = 16.dp)
                 )
-            }
 
-            Button(
-                onClick = onHomeClicked,
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Green,
-                    contentColor = Color.White
-                )
-            ) {
+                options.forEach { option ->
+                    OptionButton(
+                        text = option,
+                        isSelected = option == selectedOption,
+                        onClick = { onOptionSelected(option) }
+                    )
+                }
+
+                Button(
+                    onClick = onNextQuestion,
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = Color.Blue,
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text(
+                        text = "Next Question",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+
+                Button(
+                    onClick = onHomeClicked,
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = colorResource(id = R.color.green),
+                        contentColor = Color.White
+                    )
+                ) {
+                    Text(
+                        text = "Back to Main Menu",
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+
                 Text(
-                    text = "Back to Main Menu",
+                    text = "Score: $score",
                     style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
-                    )
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    ),
+                    modifier = Modifier.padding(top = 16.dp)
                 )
+
+
             }
-
-            Text(
-                text = "Score: $score",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                ),
-                modifier = Modifier.padding(top = 16.dp)
-            )
-
-
         }
-    }}
+    }
 }
 
 
@@ -247,7 +285,7 @@ fun OptionButton(
         shape = RoundedCornerShape(4.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (isSelected) Color.Green else Color.White,
-            contentColor = if (isSelected) Color.White else Color.Black
+            contentColor = if (isSelected) Color.White else colorResource(id = R.color.blacky)
         )
     ) {
         Text(
@@ -265,7 +303,7 @@ fun OptionButton(
 @Composable
 fun DefaultPreview() {
     TriviaGameTheme {
-        TriviaGameContent(activity =null )
+        TriviaGameContent(activity = null)
     }
 }
 

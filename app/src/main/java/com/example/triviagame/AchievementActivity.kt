@@ -12,8 +12,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,13 +33,47 @@ class AchievementActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             title = {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.badge),
+                                    contentDescription = "Energy Icon",
+                                    tint = Color.Unspecified,
+                                    modifier = Modifier.size(24.dp)
+                                )
                                 Text(
                                     text = "Achievements",
                                     style = TextStyle(
                                         fontSize = 20.sp,
-                                        fontWeight = FontWeight.Bold
+                                        fontWeight = FontWeight.Bold,
+                                        fontFamily = FontFamily(Font(R.font.modern)),
+                                        color = colorResource(id =R.color.blacky)
                                     )
+
                                 )
+
+                            },
+                            actions = {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(end = 16.dp)
+                                ) {
+                                    Icon(
+                                        painter = painterResource(id = R.drawable.energy_drink),
+                                        contentDescription = "Energy Icon",
+                                        tint = Color.Unspecified,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Text(
+                                        text = "99999",
+                                        color = colorResource(id = R.color.blacky),
+                                        style = TextStyle(
+                                            fontSize = 20.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            fontFamily = FontFamily(Font(R.font.games))
+                                        )
+
+
+                                    )
+                                }
                             },
                             backgroundColor = Color.White,
                             elevation = 4.dp
@@ -47,42 +84,42 @@ class AchievementActivity : ComponentActivity() {
                         Achievement(
                             title = "First Milestone",
                             description = "You've completed your first milestone!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.target
                         ),
                         Achievement(
                             title = "Healthy Eater",
                             description = "You've maintained a healthy diet for 30 days!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.diet
                         ),
                         Achievement(
                             title = "Fitness Enthusiast",
                             description = "You've completed 100 workouts!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.workout
                         ),
                         Achievement(
                             title = "Green Eater",
                             description = "You've maintained a plant-based diet for 30 days!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.spinach
                         ),
                         Achievement(
                             title = "Marathon Runner",
                             description = "You've completed a full marathon!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.finish_line
                         ),
                         Achievement(
                             title = "Yoga Master",
                             description = "You've mastered advanced yoga poses!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.meditation
                         ),
                         Achievement(
                             title = "Healthy Chef",
                             description = "You've cooked 100 nutritious meals!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.chef
                         ),
                         Achievement(
                             title = "Fitness Streak",
                             description = "You've exercised for 365 consecutive days!",
-                            iconRes = R.drawable.brain
+                            iconRes = R.drawable.dumbbell
                         )
                     )
 
@@ -120,6 +157,7 @@ fun AchievementItem(achievement: Achievement) {
         Icon(
             painter = painterResource(id = achievement.iconRes),
             contentDescription = null,
+            tint = Color.Unspecified,
             modifier = Modifier.size(48.dp)
         )
         Spacer(modifier = Modifier.width(16.dp))
